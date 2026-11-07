@@ -1,0 +1,342 @@
+{
+  "schema_version": 1,
+  "all_materials_synthetic": true,
+  "seed_source": "data/documents.json",
+  "seed_sha256": "d1d54f33a9792b985c65c6596c349a8040980df9d8338ece7d7c797187e0692e",
+  "reference": [
+    {
+      "file": "01-reference/siem-alert-v1.md",
+      "uploadable": false,
+      "purpose": "read_existing_seed",
+      "id": "siem-alert",
+      "version": 1,
+      "area": "siem",
+      "roles": [
+        "ib"
+      ]
+    },
+    {
+      "file": "01-reference/siem-export-v1.md",
+      "uploadable": false,
+      "purpose": "read_existing_seed",
+      "id": "siem-export",
+      "version": 1,
+      "area": "siem",
+      "roles": [
+        "ib"
+      ]
+    },
+    {
+      "file": "01-reference/siem-login-v1.md",
+      "uploadable": false,
+      "purpose": "read_existing_seed",
+      "id": "siem-login",
+      "version": 1,
+      "area": "siem",
+      "roles": [
+        "ib"
+      ]
+    },
+    {
+      "file": "01-reference/vpn-connect-v1.md",
+      "uploadable": false,
+      "purpose": "read_existing_seed",
+      "id": "vpn-connect",
+      "version": 1,
+      "area": "vpn",
+      "roles": [
+        "ib",
+        "support"
+      ]
+    },
+    {
+      "file": "01-reference/vpn-error-v1.md",
+      "uploadable": false,
+      "purpose": "read_existing_seed",
+      "id": "vpn-error",
+      "version": 1,
+      "area": "vpn",
+      "roles": [
+        "ib",
+        "support"
+      ]
+    },
+    {
+      "file": "01-reference/access-v2.md",
+      "uploadable": false,
+      "purpose": "read_existing_seed",
+      "id": "access",
+      "version": 2,
+      "area": "реестр",
+      "roles": [
+        "ib",
+        "support"
+      ]
+    },
+    {
+      "file": "01-reference/create-v1.md",
+      "uploadable": false,
+      "purpose": "read_existing_seed",
+      "id": "create",
+      "version": 1,
+      "area": "реестр",
+      "roles": [
+        "ib",
+        "support"
+      ]
+    },
+    {
+      "file": "01-reference/escal-a-v1.md",
+      "uploadable": false,
+      "purpose": "read_existing_seed",
+      "id": "escal-a",
+      "version": 1,
+      "area": "реестр",
+      "roles": [
+        "ib"
+      ]
+    },
+    {
+      "file": "01-reference/escal-b-v1.md",
+      "uploadable": false,
+      "purpose": "read_existing_seed",
+      "id": "escal-b",
+      "version": 1,
+      "area": "реестр",
+      "roles": [
+        "ib"
+      ]
+    },
+    {
+      "file": "01-reference/memo-v1.md",
+      "uploadable": false,
+      "purpose": "read_existing_seed",
+      "id": "memo",
+      "version": 1,
+      "area": "реестр",
+      "roles": [
+        "ib",
+        "support"
+      ]
+    },
+    {
+      "file": "01-reference/status-v1.md",
+      "uploadable": false,
+      "purpose": "read_existing_seed",
+      "id": "status",
+      "version": 1,
+      "area": "реестр",
+      "roles": [
+        "ib",
+        "support"
+      ]
+    },
+    {
+      "file": "01-reference/triage-v1.md",
+      "uploadable": false,
+      "purpose": "read_existing_seed",
+      "id": "triage",
+      "version": 1,
+      "area": "реестр",
+      "roles": [
+        "ib"
+      ]
+    }
+  ],
+  "uploads": [
+    {
+      "file": "02-upload/01-vpn-telemetry.txt",
+      "uploadable": true,
+      "purpose": "new_knowledge",
+      "format": "txt",
+      "metadata": {
+        "id": "demo-vpn-telemetry",
+        "rule": "vpn-telemetry-calibration",
+        "topic": "vpn-telemetry-calibration",
+        "version": 1,
+        "priority": 30,
+        "title": "Калибровка телеметрии учебного VPN",
+        "contact": "Служба сетевой поддержки",
+        "roles": [
+          "ib",
+          "support"
+        ],
+        "area": "vpn"
+      },
+      "question": "Как выполнить калибровку телеметрии?",
+      "marker": "ТЕЛЕМЕТРИЯ-21",
+      "expected_before_approval": {
+        "kind": "missing",
+        "marker_absent": "ТЕЛЕМЕТРИЯ-21"
+      },
+      "expected_after_approval": {
+        "kind": "answer",
+        "source": "demo-vpn-telemetry@1#section-001",
+        "contains": "ТЕЛЕМЕТРИЯ-21"
+      },
+      "negative_role_after_approval": null
+    },
+    {
+      "file": "02-upload/02-vpn-route-selftest.md",
+      "uploadable": true,
+      "purpose": "new_knowledge",
+      "format": "md",
+      "metadata": {
+        "id": "demo-vpn-route-selftest",
+        "rule": "vpn-route-selftest",
+        "topic": "vpn-route-selftest",
+        "version": 1,
+        "priority": 30,
+        "title": "Самодиагностика маршрутизации учебного VPN",
+        "contact": "Служба сетевой поддержки",
+        "roles": [
+          "ib",
+          "support"
+        ],
+        "area": "vpn"
+      },
+      "question": "Как выполнить самодиагностику маршрутизации?",
+      "marker": "МАРШРУТ-26",
+      "expected_before_approval": {
+        "kind": "missing",
+        "marker_absent": "МАРШРУТ-26"
+      },
+      "expected_after_approval": {
+        "kind": "answer",
+        "source": "demo-vpn-route-selftest@1#section-001",
+        "contains": "МАРШРУТ-26"
+      },
+      "negative_role_after_approval": null
+    },
+    {
+      "file": "02-upload/03-vpn-connector-attestation.docx",
+      "uploadable": true,
+      "purpose": "new_knowledge",
+      "format": "docx",
+      "metadata": {
+        "id": "demo-vpn-connector",
+        "rule": "vpn-connector-attestation",
+        "topic": "vpn-connector-attestation",
+        "version": 1,
+        "priority": 30,
+        "title": "Аттестация коннектора учебного VPN",
+        "contact": "Служба сетевой поддержки",
+        "roles": [
+          "ib"
+        ],
+        "area": "vpn"
+      },
+      "question": "Как выполнить аттестацию коннектора?",
+      "marker": "КОННЕКТОР-32",
+      "expected_before_approval": {
+        "kind": "missing",
+        "marker_absent": "КОННЕКТОР-32"
+      },
+      "expected_after_approval": {
+        "kind": "answer",
+        "source": "demo-vpn-connector@1#section-001",
+        "contains": "КОННЕКТОР-32"
+      },
+      "negative_role_after_approval": "support"
+    },
+    {
+      "file": "02-upload/04-vpn-gateway-fingerprint.pdf",
+      "uploadable": true,
+      "purpose": "new_knowledge",
+      "format": "pdf",
+      "metadata": {
+        "id": "demo-vpn-gateway",
+        "rule": "vpn-gateway-fingerprint",
+        "topic": "vpn-gateway-fingerprint",
+        "version": 1,
+        "priority": 30,
+        "title": "Сверка отпечатка шлюза учебного VPN",
+        "contact": "Служба сетевой поддержки",
+        "roles": [
+          "ib",
+          "support"
+        ],
+        "area": "vpn"
+      },
+      "question": "Как сверить отпечаток шлюза?",
+      "marker": "ШЛЮЗ-43",
+      "expected_before_approval": {
+        "kind": "missing",
+        "marker_absent": "ШЛЮЗ-43"
+      },
+      "expected_after_approval": {
+        "kind": "answer",
+        "source": "demo-vpn-gateway@1#section-001",
+        "contains": "ШЛЮЗ-43"
+      },
+      "negative_role_after_approval": null
+    },
+    {
+      "file": "02-upload/05-vpn-diagnostics-archive.json",
+      "uploadable": true,
+      "purpose": "new_knowledge",
+      "format": "json",
+      "metadata": {
+        "id": "demo-vpn-archive",
+        "rule": "vpn-diagnostics-archive",
+        "topic": "vpn-diagnostics-archive",
+        "version": 1,
+        "priority": 30,
+        "title": "Архивация протокола диагностики учебного VPN",
+        "contact": "Служба сетевой поддержки",
+        "roles": [
+          "ib",
+          "support"
+        ],
+        "area": "vpn"
+      },
+      "question": "Как выполнить архивацию протокола диагностики?",
+      "marker": "АРХИВ-54",
+      "expected_before_approval": {
+        "kind": "missing",
+        "marker_absent": "АРХИВ-54"
+      },
+      "expected_after_approval": {
+        "kind": "answer",
+        "source": "demo-vpn-archive@1#procedure",
+        "contains": "АРХИВ-54"
+      },
+      "negative_role_after_approval": null
+    }
+  ],
+  "updates": [
+    {
+      "file": "03-updates/01-access-v3-approve.json",
+      "uploadable": true,
+      "purpose": "approve_new_version",
+      "question": "Как получить доступ к реестру?",
+      "area": "реестр",
+      "roles": [
+        "ib",
+        "support"
+      ],
+      "expected_before_approval": {
+        "source": "access@2#request",
+        "marker_absent": "КУРС-03"
+      },
+      "expected_after_approval": {
+        "source": "access@3#request",
+        "contains": "КУРС-03"
+      }
+    },
+    {
+      "file": "03-updates/02-access-v4-reject.json",
+      "uploadable": true,
+      "purpose": "reject_proposal",
+      "requires": "approve_access_v3_first",
+      "question": "Как получить доступ к реестру?",
+      "area": "реестр",
+      "expected_after_rejection": {
+        "source": "access@3#request",
+        "contains": "КУРС-03",
+        "marker_absent": "КУРС-04"
+      },
+      "rejection_reason": "Не описано согласование руководителем"
+    }
+  ]
+}
