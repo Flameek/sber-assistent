@@ -1,0 +1,38 @@
+services:
+  elastic:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.17.4
+    environment:
+      discovery.type: single-node
+      xpack.security.enabled: "false"
+      xpack.ml.enabled: "false"
+      ingest.geoip.downloader.enabled: "false"
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+    volumes: ["search:/usr/share/elasticsearch/data"]
+    networks: [handbook]
+    healthcheck:
+      test: ["CMD-SHELL","curl -fsS 'http://localhost:9200/_cluster/health?wait_for_status=yellow' >/dev/null"]
+      interval: 10s
+      timeout: 6s
+      retries: 20
+  app:
+    build: .
+    environment:
+      KB_BACKEND: elastic
+      ES_URL: http://elastic:9200
+      KB_DB: /state/handbook.sqlite
+    depends_on:
+      elastic: {condition: service_healthy}
+    ports: ["127.0.0.1:8501:8501"]
+    healthcheck:
+      test: ["CMD", "python", "-c", "from urllib.request import urlopen; assert urlopen('http://127.0.0.1:8501/_stcore/health', timeout=2).read().strip() == b'ok'"]
+      interval: 5s
+      timeout: 4s
+      retries: 15
+    volumes: ["state:/state"]
+    networks: [frontend, handbook]
+networks:
+  frontend: {}
+  handbook: {internal: true}
+volumes:
+  state: {}
+  search: {}

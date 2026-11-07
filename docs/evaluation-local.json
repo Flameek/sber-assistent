@@ -1,0 +1,107 @@
+{
+  "split": "holdout",
+  "queries": 9,
+  "answerable": 6,
+  "k": 3,
+  "precision_at_k": 0.333,
+  "recall_at_k": 1.0,
+  "correct": 9,
+  "median_ms": 0.7,
+  "rows": [
+    {
+      "id": "H1",
+      "expected": "answer",
+      "got": "answer",
+      "source": "access@2#request",
+      "ranked": [
+        "access@2#request",
+        "memo@1#request",
+        "status@1#check"
+      ],
+      "ok": true
+    },
+    {
+      "id": "H2",
+      "expected": "answer",
+      "got": "answer",
+      "source": "create@1#new",
+      "ranked": [
+        "create@1#new",
+        "triage@1#classify"
+      ],
+      "ok": true
+    },
+    {
+      "id": "H3",
+      "expected": "answer",
+      "got": "answer",
+      "source": "status@1#check",
+      "ranked": [
+        "status@1#check",
+        "access@2#request"
+      ],
+      "ok": true
+    },
+    {
+      "id": "H4",
+      "expected": "answer",
+      "got": "answer",
+      "source": "triage@1#classify",
+      "ranked": [
+        "triage@1#classify"
+      ],
+      "ok": true
+    },
+    {
+      "id": "H5",
+      "expected": "missing",
+      "got": "missing",
+      "source": null,
+      "ranked": [],
+      "ok": true
+    },
+    {
+      "id": "H6",
+      "expected": "conflict",
+      "got": "conflict",
+      "source": null,
+      "ranked": [
+        "escal-a@1#limit",
+        "escal-b@1#limit",
+        "memo@1#request"
+      ],
+      "ok": true
+    },
+    {
+      "id": "H7",
+      "expected": "missing",
+      "got": "missing",
+      "source": null,
+      "ranked": [],
+      "ok": true
+    },
+    {
+      "id": "H8",
+      "expected": "answer",
+      "got": "answer",
+      "source": "access@2#request",
+      "ranked": [
+        "access@2#request",
+        "status@1#check",
+        "memo@1#request"
+      ],
+      "ok": true
+    },
+    {
+      "id": "H9",
+      "expected": "answer",
+      "got": "answer",
+      "source": "status@1#check",
+      "ranked": [
+        "status@1#check",
+        "access@2#request"
+      ],
+      "ok": true
+    }
+  ]
+}
