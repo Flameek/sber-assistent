@@ -1,0 +1,16 @@
+{
+  "model_repository": "Qwen/Qwen2.5-1.5B-Instruct-GGUF",
+  "revision": "91cad51170dc346986eccefdc2dd33a9da36ead9",
+  "file": "qwen2.5-1.5b-instruct-q4_k_m.gguf",
+  "sha256": "6a1a2eb6d15622bf3c96857206351ba97e1af16c30d7a74ee38970e434e9407e",
+  "bytes": 1117320736,
+  "license": "apache-2.0",
+  "runtime": "llama.cpp b12192 / 9f0e5098a",
+  "api_alias": "kb-model",
+  "threads": 4,
+  "ctx_size": 4096,
+  "parallel": 1,
+  "gpu_layers": 0,
+  "temperature": 0,
+  "observed_rss_mib": 2133.1
+}

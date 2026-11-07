@@ -1,0 +1,234 @@
+[
+  {
+    "id": "D1",
+    "split": "dev",
+    "role": "ib",
+    "question": "Как стажёру запросить доступ к реестру инцидентов?",
+    "expected": "answer",
+    "relevant": [
+      "access@2#request"
+    ],
+    "area": "реестр"
+  },
+  {
+    "id": "D2",
+    "split": "dev",
+    "role": "ib",
+    "question": "Как классифицировать инцидент по влиянию?",
+    "expected": "answer",
+    "relevant": [
+      "triage@1#classify"
+    ],
+    "area": "реестр"
+  },
+  {
+    "id": "D3",
+    "split": "dev",
+    "role": "support",
+    "question": "Где зарегистрировать новый инцидент?",
+    "expected": "answer",
+    "relevant": [
+      "create@1#new"
+    ],
+    "area": "реестр"
+  },
+  {
+    "id": "D4",
+    "split": "dev",
+    "role": "ib",
+    "question": "Какой срок эскалации критического инцидента?",
+    "expected": "conflict",
+    "relevant": [],
+    "area": "реестр"
+  },
+  {
+    "id": "D5",
+    "split": "dev",
+    "role": "support",
+    "question": "Как оформить командировку?",
+    "expected": "missing",
+    "relevant": [],
+    "area": "реестр"
+  },
+  {
+    "id": "D6",
+    "split": "dev",
+    "role": "ib",
+    "question": "Как проверить статус заявки на доступ?",
+    "expected": "answer",
+    "relevant": [
+      "status@1#check"
+    ],
+    "area": "реестр"
+  },
+  {
+    "id": "H1",
+    "split": "holdout",
+    "role": "support",
+    "question": "Как получить права на чтение реестра?",
+    "expected": "answer",
+    "relevant": [
+      "access@2#request"
+    ],
+    "area": "реестр"
+  },
+  {
+    "id": "H2",
+    "split": "holdout",
+    "role": "ib",
+    "question": "Как создать новую карточку инцидента?",
+    "expected": "answer",
+    "relevant": [
+      "create@1#new"
+    ],
+    "area": "реестр"
+  },
+  {
+    "id": "H3",
+    "split": "holdout",
+    "role": "support",
+    "question": "Как узнать состояние моей заявки?",
+    "expected": "answer",
+    "relevant": [
+      "status@1#check"
+    ],
+    "area": "реестр"
+  },
+  {
+    "id": "H4",
+    "split": "holdout",
+    "role": "ib",
+    "question": "Как назначить категорию и влияние инциденту?",
+    "expected": "answer",
+    "relevant": [
+      "triage@1#classify"
+    ],
+    "area": "реестр"
+  },
+  {
+    "id": "H5",
+    "split": "holdout",
+    "role": "support",
+    "question": "Как назначить категорию и влияние инциденту?",
+    "expected": "missing",
+    "relevant": [],
+    "area": "реестр"
+  },
+  {
+    "id": "H6",
+    "split": "holdout",
+    "role": "ib",
+    "question": "Через сколько минут нужна эскалация критического инцидента?",
+    "expected": "conflict",
+    "relevant": [],
+    "area": "реестр"
+  },
+  {
+    "id": "H7",
+    "split": "holdout",
+    "role": "ib",
+    "question": "Сколько дней отпуска мне положено?",
+    "expected": "missing",
+    "relevant": [],
+    "area": "реестр"
+  },
+  {
+    "id": "H8",
+    "split": "holdout",
+    "role": "support",
+    "question": "Кому отправлять заявку на доступ к реестру?",
+    "expected": "answer",
+    "relevant": [
+      "access@2#request"
+    ],
+    "area": "реестр"
+  },
+  {
+    "id": "H9",
+    "split": "holdout",
+    "role": "ib",
+    "question": "Где посмотреть состояние заявки на чтение?",
+    "expected": "answer",
+    "relevant": [
+      "status@1#check"
+    ],
+    "area": "реестр"
+  },
+  {
+    "id": "S1",
+    "split": "holdout",
+    "role": "ib",
+    "area": "siem",
+    "question": "Как войти в учебную SIEM?",
+    "expected": "answer",
+    "relevant": [
+      "siem-login@1#procedure"
+    ]
+  },
+  {
+    "id": "S2",
+    "split": "holdout",
+    "role": "ib",
+    "area": "siem",
+    "question": "Как разобрать событие в SIEM?",
+    "expected": "answer",
+    "relevant": [
+      "siem-alert@1#procedure"
+    ]
+  },
+  {
+    "id": "S3",
+    "split": "holdout",
+    "role": "ib",
+    "area": "siem",
+    "question": "Как экспортировать журналы SIEM?",
+    "expected": "answer",
+    "relevant": [
+      "siem-export@1#procedure"
+    ]
+  },
+  {
+    "id": "S4",
+    "split": "holdout",
+    "role": "ib",
+    "area": "siem",
+    "question": "Куда сохранить выгрузку журналов?",
+    "expected": "answer",
+    "relevant": [
+      "siem-export@1#procedure"
+    ]
+  },
+  {
+    "id": "S5",
+    "split": "holdout",
+    "role": "support",
+    "area": "vpn",
+    "question": "Как подключиться к учебному VPN?",
+    "expected": "answer",
+    "relevant": [
+      "vpn-connect@1#procedure"
+    ]
+  },
+  {
+    "id": "S6",
+    "split": "holdout",
+    "role": "ib",
+    "area": "vpn",
+    "question": "Что делать при ошибке сертификата VPN?",
+    "expected": "answer",
+    "relevant": [
+      "vpn-error@1#procedure"
+    ]
+  },
+  {
+    "id": "S7",
+    "split": "holdout",
+    "role": "support",
+    "area": "vpn",
+    "question": "Можно ли отключить проверку сертификатов?",
+    "expected": "answer",
+    "relevant": [
+      "vpn-error@1#procedure"
+    ]
+  }
+]

@@ -5,18 +5,22 @@
   "k": 3,
   "precision_at_k": 0.333,
   "recall_at_k": 1.0,
+  "mrr_at_k": 1.0,
   "correct": 9,
-  "median_ms": 0.7,
+  "behavior_accuracy": 1,
+  "median_ms": 1.48,
   "rows": [
     {
       "id": "H1",
       "expected": "answer",
       "got": "answer",
       "source": "access@2#request",
+      "sources": [
+        "access@2#request"
+      ],
       "ranked": [
         "access@2#request",
-        "memo@1#request",
-        "status@1#check"
+        "memo@1#request"
       ],
       "ok": true
     },
@@ -25,9 +29,11 @@
       "expected": "answer",
       "got": "answer",
       "source": "create@1#new",
+      "sources": [
+        "create@1#new"
+      ],
       "ranked": [
-        "create@1#new",
-        "triage@1#classify"
+        "create@1#new"
       ],
       "ok": true
     },
@@ -36,9 +42,11 @@
       "expected": "answer",
       "got": "answer",
       "source": "status@1#check",
+      "sources": [
+        "status@1#check"
+      ],
       "ranked": [
-        "status@1#check",
-        "access@2#request"
+        "status@1#check"
       ],
       "ok": true
     },
@@ -47,6 +55,9 @@
       "expected": "answer",
       "got": "answer",
       "source": "triage@1#classify",
+      "sources": [
+        "triage@1#classify"
+      ],
       "ranked": [
         "triage@1#classify"
       ],
@@ -57,6 +68,7 @@
       "expected": "missing",
       "got": "missing",
       "source": null,
+      "sources": [],
       "ranked": [],
       "ok": true
     },
@@ -65,10 +77,10 @@
       "expected": "conflict",
       "got": "conflict",
       "source": null,
+      "sources": [],
       "ranked": [
         "escal-a@1#limit",
-        "escal-b@1#limit",
-        "memo@1#request"
+        "escal-b@1#limit"
       ],
       "ok": true
     },
@@ -77,6 +89,7 @@
       "expected": "missing",
       "got": "missing",
       "source": null,
+      "sources": [],
       "ranked": [],
       "ok": true
     },
@@ -85,9 +98,11 @@
       "expected": "answer",
       "got": "answer",
       "source": "access@2#request",
+      "sources": [
+        "access@2#request"
+      ],
       "ranked": [
         "access@2#request",
-        "status@1#check",
         "memo@1#request"
       ],
       "ok": true
@@ -97,9 +112,11 @@
       "expected": "answer",
       "got": "answer",
       "source": "status@1#check",
+      "sources": [
+        "status@1#check"
+      ],
       "ranked": [
-        "status@1#check",
-        "access@2#request"
+        "status@1#check"
       ],
       "ok": true
     }

@@ -4,3 +4,8 @@
 __pycache__
 *.pyc
 .env
+models
+.runtime
+*.gguf
+*.sqlite
+*.sqlite-*
