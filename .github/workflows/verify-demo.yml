@@ -1,12 +1,19 @@
 name: Проверка демо с Elasticsearch
 on:
   workflow_dispatch:
+    inputs:
+      test_llm:
+        description: "Загрузить и проверить реальную локальную LLM"
+        type: boolean
+        default: false
 permissions:
   contents: read
 jobs:
   demo:
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    timeout-minutes: 25
+    env:
+      KB_DEMO_MODE: "true"
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
@@ -17,20 +24,31 @@ jobs:
           curl --retry 20 --retry-all-errors --retry-delay 2 -fsS http://127.0.0.1:8501/_stcore/health
           docker compose ps
           docker compose exec -T elastic curl -fsS http://localhost:9200/
-      - name: Проверить интеграцию и все 9 отложенных вопросов
+      - name: Проверить интеграцию, отложенные вопросы и регрессии
         run: |
           docker compose exec -T -e KB_TEST_ES=1 app python -m unittest discover -v
           docker compose exec -T app python -m kb.evaluate --backend elastic --split holdout > evaluation.json
+          docker compose exec -T app python -m kb.evaluate --backend elastic --split regression > regression.json
           cat evaluation.json
           python3 - <<'PY'
           import json,os
           s=json.load(open('evaluation.json'))
           assert s['queries']==9 and s['correct']==9 and s['answerable']==6, s
           assert s['recall_at_k']==1 and s['precision_at_k']==0.333, s
+          r=json.load(open('regression.json'))
+          assert r['queries']==30 and r['correct']==30, r
           with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as f:
               print(f"Elasticsearch: {s['correct']}/{s['queries']}; Precision@3: {s['precision_at_k']}; Recall@3: {s['recall_at_k']}; медиана запроса: {s['median_ms']} мс.", file=f)
+              print(f"Регрессионные вопросы: {r['correct']}/{r['queries']}", file=f)
           PY
+      - name: Загрузить модель по запросу
+        if: inputs.test_llm
+        run: docker compose exec -T ollama ollama pull qwen2.5:1.5b
+      - name: Проверить retrieval-метрики
+        run: docker compose exec -T app python -m kb.benchmark --backend elastic
       - name: Пройти сценарий защиты в Chrome
+        env:
+          KB_VERIFY_LLM: ${{ inputs.test_llm && '1' || '0' }}
         run: |
           python3 -m venv "$RUNNER_TEMP/demo-venv"
           "$RUNNER_TEMP/demo-venv/bin/pip" -q install playwright==1.55.0

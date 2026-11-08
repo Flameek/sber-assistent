@@ -1,0 +1,6 @@
+# Optional presentation: host Streamlit + host Ollama + container Elasticsearch.
+# Only localhost is published. The default compose.yaml remains unchanged.
+services:
+  elastic:
+    ports: ['127.0.0.1:9200:9200']
+    networks: [frontend, knowledge]

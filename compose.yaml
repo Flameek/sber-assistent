@@ -3,36 +3,50 @@ services:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.17.4
     environment:
       discovery.type: single-node
-      xpack.security.enabled: "false"
-      xpack.ml.enabled: "false"
-      ingest.geoip.downloader.enabled: "false"
-      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
-    volumes: ["search:/usr/share/elasticsearch/data"]
-    networks: [handbook]
+      xpack.security.enabled: 'false'
+      xpack.ml.enabled: 'false'
+      ingest.geoip.downloader.enabled: 'false'
+      ES_JAVA_OPTS: '-Xms512m -Xmx512m'
+    volumes: ['search:/usr/share/elasticsearch/data']
+    networks: [knowledge]
     healthcheck:
-      test: ["CMD-SHELL","curl -fsS 'http://localhost:9200/_cluster/health?wait_for_status=yellow' >/dev/null"]
+      test: [CMD-SHELL, "curl -fsS 'http://localhost:9200/_cluster/health?wait_for_status=yellow' >/dev/null"]
       interval: 10s
       timeout: 6s
       retries: 20
+  ollama:
+    image: ollama/ollama:0.13.5
+    environment:
+      OLLAMA_CONTEXT_LENGTH: '4096'
+      OLLAMA_NUM_PARALLEL: '1'
+    volumes: ['models:/root/.ollama']
+    networks: [frontend, knowledge]
   app:
     build: .
+    env_file:
+      - path: .env
+        required: false
     environment:
       KB_BACKEND: elastic
       ES_URL: http://elastic:9200
       KB_DB: /state/handbook.sqlite
+      KB_DEMO_MODE: ${KB_DEMO_MODE:-false}
+      LLM_BASE_URL: http://ollama:11434/v1
     depends_on:
       elastic: {condition: service_healthy}
-    ports: ["127.0.0.1:8501:8501"]
+      ollama: {condition: service_started}
+    ports: ['127.0.0.1:8501:8501']
     healthcheck:
-      test: ["CMD", "python", "-c", "from urllib.request import urlopen; assert urlopen('http://127.0.0.1:8501/_stcore/health', timeout=2).read().strip() == b'ok'"]
+      test: [CMD, python, '-c', "from urllib.request import urlopen; assert urlopen('http://127.0.0.1:8501/_stcore/health', timeout=2).read().strip() == b'ok'"]
       interval: 5s
       timeout: 4s
       retries: 15
-    volumes: ["state:/state"]
-    networks: [frontend, handbook]
+    volumes: ['state:/state']
+    networks: [frontend, knowledge]
 networks:
   frontend: {}
-  handbook: {internal: true}
+  knowledge: {internal: true}
 volumes:
   state: {}
   search: {}
+  models: {}

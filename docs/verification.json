@@ -1,0 +1,13 @@
+{
+  "date": "2026-11-08",
+  "timezone": "Europe/Moscow",
+  "automated_tests": 46,
+  "passed": 46,
+  "skipped": 0,
+  "elasticsearch": "8.17.4 / native tar / live",
+  "docker_compose": "not_run",
+  "gigachat_live": "not_run",
+  "real_llm_outcomes": 10,
+  "real_llm_cases": 10,
+  "browser_acceptance": "passed, including real local model"
+}

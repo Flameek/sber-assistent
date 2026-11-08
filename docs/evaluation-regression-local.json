@@ -1,0 +1,346 @@
+{
+  "split": "regression",
+  "queries": 30,
+  "answerable": 12,
+  "k": 3,
+  "precision_at_k": 0.417,
+  "recall_at_k": 1.0,
+  "mrr_at_k": 1.0,
+  "correct": 30,
+  "behavior_accuracy": 1,
+  "median_ms": 0.06,
+  "rows": [
+    {
+      "id": "R01",
+      "expected": "missing",
+      "got": "missing",
+      "source": null,
+      "sources": [],
+      "ranked": [],
+      "ok": true
+    },
+    {
+      "id": "R02",
+      "expected": "missing",
+      "got": "missing",
+      "source": null,
+      "sources": [],
+      "ranked": [],
+      "ok": true
+    },
+    {
+      "id": "R03",
+      "expected": "missing",
+      "got": "missing",
+      "source": null,
+      "sources": [],
+      "ranked": [],
+      "ok": true
+    },
+    {
+      "id": "R04",
+      "expected": "missing",
+      "got": "missing",
+      "source": null,
+      "sources": [],
+      "ranked": [],
+      "ok": true
+    },
+    {
+      "id": "R05",
+      "expected": "missing",
+      "got": "missing",
+      "source": null,
+      "sources": [],
+      "ranked": [],
+      "ok": true
+    },
+    {
+      "id": "R06",
+      "expected": "missing",
+      "got": "missing",
+      "source": null,
+      "sources": [],
+      "ranked": [],
+      "ok": true
+    },
+    {
+      "id": "R07",
+      "expected": "missing",
+      "got": "missing",
+      "source": null,
+      "sources": [],
+      "ranked": [],
+      "ok": true
+    },
+    {
+      "id": "R08",
+      "expected": "missing",
+      "got": "missing",
+      "source": null,
+      "sources": [],
+      "ranked": [],
+      "ok": true
+    },
+    {
+      "id": "R09",
+      "expected": "missing",
+      "got": "missing",
+      "source": null,
+      "sources": [],
+      "ranked": [],
+      "ok": true
+    },
+    {
+      "id": "R10",
+      "expected": "missing",
+      "got": "missing",
+      "source": null,
+      "sources": [],
+      "ranked": [],
+      "ok": true
+    },
+    {
+      "id": "R11",
+      "expected": "missing",
+      "got": "missing",
+      "source": null,
+      "sources": [],
+      "ranked": [],
+      "ok": true
+    },
+    {
+      "id": "R12",
+      "expected": "missing",
+      "got": "missing",
+      "source": null,
+      "sources": [],
+      "ranked": [],
+      "ok": true
+    },
+    {
+      "id": "R13",
+      "expected": "missing",
+      "got": "missing",
+      "source": null,
+      "sources": [],
+      "ranked": [],
+      "ok": true
+    },
+    {
+      "id": "R14",
+      "expected": "missing",
+      "got": "missing",
+      "source": null,
+      "sources": [],
+      "ranked": [],
+      "ok": true
+    },
+    {
+      "id": "R15",
+      "expected": "missing",
+      "got": "missing",
+      "source": null,
+      "sources": [],
+      "ranked": [],
+      "ok": true
+    },
+    {
+      "id": "R16",
+      "expected": "missing",
+      "got": "missing",
+      "source": null,
+      "sources": [],
+      "ranked": [],
+      "ok": true
+    },
+    {
+      "id": "R17",
+      "expected": "answer",
+      "got": "answer",
+      "source": null,
+      "sources": [
+        "create@1#new",
+        "status@1#check"
+      ],
+      "ranked": [
+        "create@1#new",
+        "status@1#check"
+      ],
+      "ok": true
+    },
+    {
+      "id": "R18",
+      "expected": "answer",
+      "got": "answer",
+      "source": null,
+      "sources": [
+        "access@2#request",
+        "create@1#new"
+      ],
+      "ranked": [
+        "access@2#request",
+        "memo@1#request",
+        "create@1#new"
+      ],
+      "ok": true
+    },
+    {
+      "id": "R19",
+      "expected": "answer",
+      "got": "answer",
+      "source": null,
+      "sources": [
+        "access@2#request",
+        "status@1#check"
+      ],
+      "ranked": [
+        "access@2#request",
+        "memo@1#request",
+        "status@1#check"
+      ],
+      "ok": true
+    },
+    {
+      "id": "R20",
+      "expected": "partial",
+      "got": "partial",
+      "source": "access@2#request",
+      "sources": [
+        "access@2#request"
+      ],
+      "ranked": [
+        "access@2#request",
+        "memo@1#request"
+      ],
+      "ok": true
+    },
+    {
+      "id": "R21",
+      "expected": "partial",
+      "got": "partial",
+      "source": "access@2#request",
+      "sources": [
+        "access@2#request"
+      ],
+      "ranked": [
+        "access@2#request",
+        "memo@1#request"
+      ],
+      "ok": true
+    },
+    {
+      "id": "R22",
+      "expected": "partial",
+      "got": "partial",
+      "source": "create@1#new",
+      "sources": [
+        "create@1#new"
+      ],
+      "ranked": [
+        "create@1#new"
+      ],
+      "ok": true
+    },
+    {
+      "id": "R23",
+      "expected": "partial",
+      "got": "partial",
+      "source": "create@1#new",
+      "sources": [
+        "create@1#new"
+      ],
+      "ranked": [
+        "create@1#new",
+        "escal-a@1#limit",
+        "escal-b@1#limit"
+      ],
+      "ok": true
+    },
+    {
+      "id": "R24",
+      "expected": "answer",
+      "got": "answer",
+      "source": "create@1#new",
+      "sources": [
+        "create@1#new"
+      ],
+      "ranked": [
+        "create@1#new"
+      ],
+      "ok": true
+    },
+    {
+      "id": "R25",
+      "expected": "answer",
+      "got": "answer",
+      "source": "status@1#check",
+      "sources": [
+        "status@1#check"
+      ],
+      "ranked": [
+        "status@1#check"
+      ],
+      "ok": true
+    },
+    {
+      "id": "R26",
+      "expected": "answer",
+      "got": "answer",
+      "source": "access@2#request",
+      "sources": [
+        "access@2#request"
+      ],
+      "ranked": [
+        "access@2#request",
+        "memo@1#request"
+      ],
+      "ok": true
+    },
+    {
+      "id": "R27",
+      "expected": "answer",
+      "got": "answer",
+      "source": "access@2#request",
+      "sources": [
+        "access@2#request"
+      ],
+      "ranked": [
+        "access@2#request",
+        "memo@1#request"
+      ],
+      "ok": true
+    },
+    {
+      "id": "R28",
+      "expected": "answer",
+      "got": "answer",
+      "source": "status@1#check",
+      "sources": [
+        "status@1#check"
+      ],
+      "ranked": [
+        "status@1#check"
+      ],
+      "ok": true
+    },
+    {
+      "id": "R29",
+      "expected": "clarify",
+      "got": "clarify",
+      "source": null,
+      "sources": [],
+      "ranked": [],
+      "ok": true
+    },
+    {
+      "id": "R30",
+      "expected": "missing",
+      "got": "missing",
+      "source": null,
+      "sources": [],
+      "ranked": [],
+      "ok": true
+    }
+  ]
+}

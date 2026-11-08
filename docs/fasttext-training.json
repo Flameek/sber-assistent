@@ -1,0 +1,8 @@
+{
+  "corpus": "13e29221e6964797432b4286",
+  "dimensions": 64,
+  "epochs": 40,
+  "seed": 42,
+  "workers": 1,
+  "training_chunks": 12
+}

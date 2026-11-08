@@ -1,0 +1,158 @@
+{
+  "method": "tfidf",
+  "split": "holdout",
+  "k": 3,
+  "queries": 13,
+  "precision_at_k": 0.333,
+  "recall_at_k": 1.0,
+  "mrr_at_k": 0.962,
+  "median_ms": 0.18,
+  "rows": [
+    {
+      "id": "H1",
+      "precision_at_k": 0.3333333333333333,
+      "recall_at_k": 1.0,
+      "mrr": 0.5,
+      "ranked": [
+        "memo@1#request",
+        "access@2#request",
+        "status@1#check"
+      ],
+      "ms": 36.9
+    },
+    {
+      "id": "H2",
+      "precision_at_k": 0.3333333333333333,
+      "recall_at_k": 1.0,
+      "mrr": 1.0,
+      "ranked": [
+        "create@1#new",
+        "triage@1#classify"
+      ],
+      "ms": 23.25
+    },
+    {
+      "id": "H3",
+      "precision_at_k": 0.3333333333333333,
+      "recall_at_k": 1.0,
+      "mrr": 1.0,
+      "ranked": [
+        "status@1#check",
+        "access@2#request"
+      ],
+      "ms": 0.2
+    },
+    {
+      "id": "H4",
+      "precision_at_k": 0.3333333333333333,
+      "recall_at_k": 1.0,
+      "mrr": 1.0,
+      "ranked": [
+        "triage@1#classify"
+      ],
+      "ms": 0.09
+    },
+    {
+      "id": "H8",
+      "precision_at_k": 0.3333333333333333,
+      "recall_at_k": 1.0,
+      "mrr": 1.0,
+      "ranked": [
+        "access@2#request",
+        "status@1#check",
+        "memo@1#request"
+      ],
+      "ms": 0.18
+    },
+    {
+      "id": "H9",
+      "precision_at_k": 0.3333333333333333,
+      "recall_at_k": 1.0,
+      "mrr": 1.0,
+      "ranked": [
+        "status@1#check",
+        "access@2#request"
+      ],
+      "ms": 0.04
+    },
+    {
+      "id": "S1",
+      "precision_at_k": 0.3333333333333333,
+      "recall_at_k": 1.0,
+      "mrr": 1.0,
+      "ranked": [
+        "siem-login@1#procedure",
+        "siem-export@1#procedure",
+        "siem-alert@1#procedure"
+      ],
+      "ms": 4.69
+    },
+    {
+      "id": "S2",
+      "precision_at_k": 0.3333333333333333,
+      "recall_at_k": 1.0,
+      "mrr": 1.0,
+      "ranked": [
+        "siem-alert@1#procedure",
+        "siem-export@1#procedure",
+        "siem-login@1#procedure"
+      ],
+      "ms": 0.05
+    },
+    {
+      "id": "S3",
+      "precision_at_k": 0.3333333333333333,
+      "recall_at_k": 1.0,
+      "mrr": 1.0,
+      "ranked": [
+        "siem-export@1#procedure",
+        "siem-alert@1#procedure",
+        "siem-login@1#procedure"
+      ],
+      "ms": 0.05
+    },
+    {
+      "id": "S4",
+      "precision_at_k": 0.3333333333333333,
+      "recall_at_k": 1.0,
+      "mrr": 1.0,
+      "ranked": [
+        "siem-export@1#procedure",
+        "siem-alert@1#procedure"
+      ],
+      "ms": 0.04
+    },
+    {
+      "id": "S5",
+      "precision_at_k": 0.3333333333333333,
+      "recall_at_k": 1.0,
+      "mrr": 1.0,
+      "ranked": [
+        "vpn-connect@1#procedure",
+        "vpn-error@1#procedure"
+      ],
+      "ms": 2.54
+    },
+    {
+      "id": "S6",
+      "precision_at_k": 0.3333333333333333,
+      "recall_at_k": 1.0,
+      "mrr": 1.0,
+      "ranked": [
+        "vpn-error@1#procedure",
+        "vpn-connect@1#procedure"
+      ],
+      "ms": 0.25
+    },
+    {
+      "id": "S7",
+      "precision_at_k": 0.3333333333333333,
+      "recall_at_k": 1.0,
+      "mrr": 1.0,
+      "ranked": [
+        "vpn-error@1#procedure"
+      ],
+      "ms": 0.13
+    }
+  ]
+}

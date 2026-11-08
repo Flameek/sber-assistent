@@ -138,5 +138,288 @@
     "relevant": [
       "status@1#check"
     ]
+  },
+  {
+    "id": "R01",
+    "split": "regression",
+    "role": "ib",
+    "question": "Как отозвать доступ к реестру?",
+    "expected": "missing",
+    "relevant": []
+  },
+  {
+    "id": "R02",
+    "split": "regression",
+    "role": "ib",
+    "question": "Как получить доступ администратора к реестру?",
+    "expected": "missing",
+    "relevant": []
+  },
+  {
+    "id": "R03",
+    "split": "regression",
+    "role": "support",
+    "question": "Как запросить права на запись в реестре?",
+    "expected": "missing",
+    "relevant": []
+  },
+  {
+    "id": "R04",
+    "split": "regression",
+    "role": "ib",
+    "question": "Как изменить статус заявки?",
+    "expected": "missing",
+    "relevant": []
+  },
+  {
+    "id": "R05",
+    "split": "regression",
+    "role": "ib",
+    "question": "Что делать, если заявка на доступ отклонена?",
+    "expected": "missing",
+    "relevant": []
+  },
+  {
+    "id": "R06",
+    "split": "regression",
+    "role": "support",
+    "question": "Можно ли получить доступ без согласования руководителя?",
+    "expected": "missing",
+    "relevant": []
+  },
+  {
+    "id": "R07",
+    "split": "regression",
+    "role": "ib",
+    "question": "Как восстановить доступ к реестру?",
+    "expected": "missing",
+    "relevant": []
+  },
+  {
+    "id": "R08",
+    "split": "regression",
+    "role": "ib",
+    "question": "Как заблокировать доступ к реестру?",
+    "expected": "missing",
+    "relevant": []
+  },
+  {
+    "id": "R09",
+    "split": "regression",
+    "role": "ib",
+    "question": "Что делать, если забыл пароль?",
+    "expected": "missing",
+    "relevant": []
+  },
+  {
+    "id": "R10",
+    "split": "regression",
+    "role": "ib",
+    "question": "Как завести учетную запись?",
+    "expected": "missing",
+    "relevant": []
+  },
+  {
+    "id": "R11",
+    "split": "regression",
+    "role": "support",
+    "question": "Как удалить карточку инцидента?",
+    "expected": "missing",
+    "relevant": []
+  },
+  {
+    "id": "R12",
+    "split": "regression",
+    "role": "ib",
+    "question": "Как получить доступ к почте?",
+    "expected": "missing",
+    "relevant": []
+  },
+  {
+    "id": "R13",
+    "split": "regression",
+    "role": "ib",
+    "question": "Как получить доступ к VPN?",
+    "expected": "missing",
+    "relevant": []
+  },
+  {
+    "id": "R14",
+    "split": "regression",
+    "role": "ib",
+    "question": "Как зарегистрировать инцидент в SIEM?",
+    "expected": "missing",
+    "relevant": []
+  },
+  {
+    "id": "R15",
+    "split": "regression",
+    "role": "support",
+    "question": "Когда согласуют заявку на доступ?",
+    "expected": "missing",
+    "relevant": []
+  },
+  {
+    "id": "R16",
+    "split": "regression",
+    "role": "ib",
+    "question": "Не могу получить доступ к реестру, появляется ошибка",
+    "expected": "missing",
+    "relevant": []
+  },
+  {
+    "id": "R17",
+    "split": "regression",
+    "role": "ib",
+    "question": "Как зарегистрировать новый инцидент и проверить статус заявки?",
+    "expected": "answer",
+    "relevant": [
+      "create@1#new",
+      "status@1#check"
+    ]
+  },
+  {
+    "id": "R18",
+    "split": "regression",
+    "role": "support",
+    "question": "Как получить доступ и зарегистрировать инцидент?",
+    "expected": "answer",
+    "relevant": [
+      "access@2#request",
+      "create@1#new"
+    ]
+  },
+  {
+    "id": "R19",
+    "split": "regression",
+    "role": "ib",
+    "question": "Как получить доступ, затем проверить статус заявки?",
+    "expected": "answer",
+    "relevant": [
+      "access@2#request",
+      "status@1#check"
+    ]
+  },
+  {
+    "id": "R20",
+    "split": "regression",
+    "role": "ib",
+    "question": "Как получить и отозвать доступ?",
+    "expected": "partial",
+    "relevant": [
+      "access@2#request"
+    ],
+    "expected_parts": [
+      "answer",
+      "missing"
+    ]
+  },
+  {
+    "id": "R21",
+    "split": "regression",
+    "role": "support",
+    "question": "Как получить доступ и классифицировать инцидент?",
+    "expected": "partial",
+    "relevant": [
+      "access@2#request"
+    ],
+    "expected_parts": [
+      "answer",
+      "missing"
+    ]
+  },
+  {
+    "id": "R22",
+    "split": "regression",
+    "role": "ib",
+    "question": "Как зарегистрировать инцидент и сколько дней отпуска мне положено?",
+    "expected": "partial",
+    "relevant": [
+      "create@1#new"
+    ],
+    "expected_parts": [
+      "answer",
+      "missing"
+    ]
+  },
+  {
+    "id": "R23",
+    "split": "regression",
+    "role": "ib",
+    "question": "Как зарегистрировать инцидент и каков срок эскалации критического инцидента?",
+    "expected": "partial",
+    "relevant": [
+      "create@1#new"
+    ],
+    "expected_parts": [
+      "answer",
+      "conflict"
+    ]
+  },
+  {
+    "id": "R24",
+    "split": "regression",
+    "role": "ib",
+    "question": "Как завести новую карточку инцидента?",
+    "expected": "answer",
+    "relevant": [
+      "create@1#new"
+    ]
+  },
+  {
+    "id": "R25",
+    "split": "regression",
+    "role": "support",
+    "question": "Как отследить статус заявки?",
+    "expected": "answer",
+    "relevant": [
+      "status@1#check"
+    ]
+  },
+  {
+    "id": "R26",
+    "split": "regression",
+    "role": "ib",
+    "question": "Как оформить доступ к учебному реестру?",
+    "expected": "answer",
+    "relevant": [
+      "access@2#request"
+    ]
+  },
+  {
+    "id": "R27",
+    "split": "regression",
+    "role": "support",
+    "question": "Как запросить доступ на чтение?",
+    "expected": "answer",
+    "relevant": [
+      "access@2#request"
+    ]
+  },
+  {
+    "id": "R28",
+    "split": "regression",
+    "role": "ib",
+    "question": "Как узнать состояние заявки на доступ?",
+    "expected": "answer",
+    "relevant": [
+      "status@1#check"
+    ]
+  },
+  {
+    "id": "R29",
+    "split": "regression",
+    "role": "ib",
+    "question": "",
+    "expected": "clarify",
+    "relevant": []
+  },
+  {
+    "id": "R30",
+    "split": "regression",
+    "role": "support",
+    "question": "Какой срок эскалации критического инцидента?",
+    "expected": "missing",
+    "relevant": []
   }
 ]

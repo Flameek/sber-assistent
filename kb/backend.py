@@ -51,6 +51,6 @@ class Elastic:
         return sorted([h["_source"] for h in hits],key=lambda x:x["ref"])
 
 def backend():
-    value=os.getenv("KB_BACKEND","elastic")
+    value=os.getenv("KB_BACKEND","local")
     if value not in ("local","elastic"): raise ValueError("Неизвестный KB_BACKEND")
     return Elastic() if value=="elastic" else Local()

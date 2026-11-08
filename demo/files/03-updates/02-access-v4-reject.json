@@ -1,0 +1,20 @@
+{
+  "id": "access",
+  "title": "Доступ к реестру инцидентов",
+  "version": 4,
+  "priority": 30,
+  "rule": "access",
+  "roles": [
+    "ib",
+    "support"
+  ],
+  "area": "реестр",
+  "contact": "Служба сопровождения учебного реестра",
+  "sections": [
+    {
+      "key": "request",
+      "text": "Для получения доступа к учебному реестру укажите код КУРС-04.",
+      "topic": "access-read"
+    }
+  ]
+}
