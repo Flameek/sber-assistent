@@ -6,7 +6,7 @@ from .service import Service
 
 def evaluate(engine,split="holdout",k=3):
     service=Service(chunks(seed()),engine)
-    cases=[q for q in json.loads((ROOT/"data/questions.json").read_text()) if q["split"]==split]
+    cases=[q for q in json.loads((ROOT/"data/questions.json").read_text(encoding="utf-8")) if q["split"]==split]
     rows=[];precision=[];recall=[];times=[]
     for q in cases:
         t=time.perf_counter(); r=service.ask(q["role"],q["question"]);times.append(1000*(time.perf_counter()-t))

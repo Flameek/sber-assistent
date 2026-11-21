@@ -9,7 +9,7 @@ class UpdateTests(unittest.TestCase):
     def test_publication_changes_answers_while_old_links_disappear(self):
         with tempfile.TemporaryDirectory() as tmp:
             s=Store(Path(tmp)/'db')
-            doc=json.loads((ROOT/'data/update-example.json').read_text())
+            doc=json.loads((ROOT/'data/update-example.json').read_text(encoding="utf-8"))
             n=s.propose(doc,"ib")
             def service():return Service(chunks(s.published()),Local())
             def ask():return service().ask("ib","Как получить доступ к реестру?")["text"]

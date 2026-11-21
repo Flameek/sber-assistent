@@ -8,7 +8,7 @@ import json
 class ElasticIntegration(unittest.TestCase):
     def test_elastic_and_reference_agree_and_do_not_leak(self):
         rows=chunks(seed());a=Service(rows,Elastic());b=Service(rows,Local())
-        for q in json.loads((ROOT/"data/questions.json").read_text()):
+        for q in json.loads((ROOT/"data/questions.json").read_text(encoding="utf-8")):
             with self.subTest(case=q["id"]):
                 self.assertEqual(a.ask(q['role'],q['question']),b.ask(q['role'],q['question']))
         self.assertIsNone(a.source("support","triage@1#classify"))
