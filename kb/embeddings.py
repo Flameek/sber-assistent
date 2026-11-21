@@ -6,7 +6,16 @@
 import os
 from functools import lru_cache
 
-MODEL_NAME = os.getenv("KB_EMBED_MODEL", "intfloat/multilingual-e5-base")
+MODEL_NAME = os.getenv("KB_EMBED_MODEL", "deepvk/USER-base")
+
+# Пороги уверенности подобраны скриптом scripts/tune_threshold.py на dev + holdout + dev2:
+# середина участка с наименьшей ценой ошибок. У каждой модели свой масштаб оценок,
+# поэтому и порог у каждой свой.
+THRESHOLDS = {
+    "deepvk/USER-base": 0.61,
+    "intfloat/multilingual-e5-base": 0.86,
+}
+DEFAULT_THRESHOLD = THRESHOLDS.get(MODEL_NAME, 0.5)
 
 # Векторы уже посчитанных разделов: текст -> вектор. Инструкции меняются редко,
 # поэтому каждый раздел кодируется один раз за всё время работы приложения.

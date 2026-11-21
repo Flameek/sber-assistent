@@ -4,7 +4,7 @@ from functools import lru_cache
 import math
 import os
 import re
-
+from .embeddings import DEFAULT_THRESHOLD
 import pymorphy3
 
 MORPH = pymorphy3.MorphAnalyzer()
@@ -84,7 +84,7 @@ def lexical_confident(lexical, question):
 
 
 RANKER = os.getenv("KB_RANKER", "tfidf")  # "tfidf" или "hybrid"
-SEM_THRESHOLD = float(os.getenv("KB_EMBED_THRESHOLD", "0.84"))
+SEM_THRESHOLD = float(os.getenv("KB_EMBED_THRESHOLD", DEFAULT_THRESHOLD))
 RRF_K = 60  # стандартная константа Reciprocal Rank Fusion
 
 

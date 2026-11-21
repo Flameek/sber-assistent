@@ -1,9 +1,10 @@
 """Оценка ассистента на размеченных вопросах.
 
 Наборы (split):
-  dev     — вопросы, на которых настраивали поиск;
+  dev — вопросы, на которых настраивали поиск;
   holdout — отложенные вопросы из исходного проекта;
-  stress  — сложные перефразировки, ловушки и попытки утечки (data/stress.json).
+  dev2 — новые вопросы для настройки порога гибрида (data/dev2.json);
+  stress — сложные перефразировки, ловушки и попытки утечки (data/stress.json).
 """
 import argparse
 import json
@@ -15,7 +16,7 @@ from .backend import Elastic, Local
 from .corpus import ROOT, chunks, seed
 from .service import Service
 
-QUESTION_FILES = ("data/questions.json", "data/stress.json")
+QUESTION_FILES = ("data/questions.json", "data/dev2.json", "data/stress.json")
 
 
 def load_questions(split):
@@ -106,7 +107,7 @@ def print_summary(report):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--backend", choices=("elastic", "local"), default="local")
-    parser.add_argument("--split", choices=("dev", "holdout", "stress"), default="holdout")
+    parser.add_argument("--split", choices=("dev", "dev2", "holdout", "stress"), default="holdout")
     parser.add_argument("--ranker", choices=("tfidf", "hybrid"), default=None,
                         help="метод поиска; по умолчанию из KB_RANKER или tfidf")
     parser.add_argument("--summary", action="store_true", help="коротко, вместо полного JSON")
