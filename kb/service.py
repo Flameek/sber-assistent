@@ -156,4 +156,5 @@ class Service:
         if not ordered:
             return missing
         row = ordered[0][1]
-        return {"kind": "answer", "text": row["text"], "source": row["ref"], "ranked": refs}
+        return {"kind": "answer", "text": row["text"], "source": row["ref"], "ranked": refs,
+                "title": row["title"], "version": row["version"], "contact": row["contact"]}

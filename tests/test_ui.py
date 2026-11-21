@@ -4,6 +4,12 @@ from pathlib import Path
 from streamlit.testing.v1 import AppTest
 from kb.corpus import ROOT
 
+
+def shown(a):
+    """Весь текст, который видит пользователь: ответ, плашки, подписи и раздел инструкции."""
+    return [e.value for e in [*a.markdown, *a.text, *a.caption, *a.warning]]
+
+
 class AppTests(unittest.TestCase):
     def test_question_link_and_profile_switch(self):
         with tempfile.TemporaryDirectory() as tmp,patch.dict(os.environ,KB_BACKEND="local",KB_DB=str(Path(tmp)/"db")):
@@ -11,9 +17,9 @@ class AppTests(unittest.TestCase):
             a.sidebar.selectbox[0].select("ib").run()
             a.text_input[0].set_value("Как классифицировать инцидент по влиянию?")
             a.button[0].click().run();self.assertFalse(a.exception)
-            self.assertTrue(any("УЧ-ИБ-7" in t.value for t in a.text))
+            self.assertTrue(any("УЧ-ИБ-7" in t.value for t in a.markdown))
             next(b for b in a.button if b.label=="Открыть раздел инструкции").click().run()
             self.assertIn("triage@1#classify",a.query_params["source"])
             a.sidebar.selectbox[0].select("support").run()
-            self.assertFalse(a.exception);self.assertFalse(any("УЧ-ИБ-7" in t.value for t in a.text))
+            self.assertFalse(a.exception);self.assertFalse(any("УЧ-ИБ-7" in v for v in shown(a)))
             self.assertTrue(any("Раздел недоступен" in t.value for t in a.info))

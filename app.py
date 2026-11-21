@@ -4,13 +4,13 @@ from kb.store import Store
 import json
 from kb.backend import backend
 from kb.service import Service
+from kb.answer import as_markdown
 
 st.set_page_config(page_title="Ассистент базы знаний",page_icon="📘")
 st.title("Ассистент базы знаний")
 st.caption("Учебный реестр инцидентов · материалы условного банка")
-profiles={**ROLES,"lead":"Тимлид ИБ (демо)"}
-actor=st.sidebar.selectbox("Демонстрационный профиль",["support","ib","lead"],format_func=profiles.get)
-role="ib" if actor=="lead" else actor
+actor=st.sidebar.selectbox("Демонстрационный профиль",list(ROLES),format_func=ROLES.get)
+role=actor
 st.sidebar.caption("Переключатель для локального показа на синтетических данных. Это не вход в корпоративную систему.")
 @st.cache_resource
 def engine():return backend()
@@ -20,7 +20,14 @@ q=st.text_input("Вопрос по инструкциям","Как стажёр�
 if st.button("Найти ответ") or st.session_state.get("last") == (role,q):
     st.session_state["last"]=(role,q)
     try:
-        result=service.ask(role,q);st.text(result["text"])
+        result = service.ask(role, q)
+        with st.container(key="answer"):
+            if result["kind"] == "answer":
+                st.markdown(f"**{result['title']}**")
+                st.markdown(as_markdown(result))
+                st.caption(f"Источник: версия {result['version']} · Ответственный: {result['contact']}")
+            else:
+                st.warning(result["text"])
         if result["source"]:
             if st.button("Открыть раздел инструкции"):
                 st.query_params["source"]=result["source"]

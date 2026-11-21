@@ -4,7 +4,23 @@ from pathlib import Path
 import json
 
 ROOT = Path(__file__).resolve().parents[1]
-ROLES = {"ib": "Стажёр ИБ", "support": "Стажёр поддержки"}
+# Роли по старшинству, от младшей к старшей. Старшая роль видит всё, что видят младшие.
+ROLES = {
+    "support": "Стажёр поддержки",
+    "support_spec": "Специалист поддержки",
+    "ib": "Стажёр ИБ",
+    "ib_junior": "Младший аналитик ИБ",
+    "analyst": "Аналитик ИБ",
+    "senior": "Старший аналитик ИБ",
+    "lead": "Тимлид ИБ (демо)",
+}
+LEVEL = {role: level for level, role in enumerate(ROLES)}
+
+
+def with_seniors(roles):
+    """Роли инструкции плюс все старшие: ["senior"] -> ["senior", "lead"]."""
+    lowest = min(LEVEL[r] for r in roles)
+    return [r for r in ROLES if LEVEL[r] >= lowest]
 
 def seed():
     return json.loads((ROOT / "data/documents.json").read_text(encoding="utf-8"))
@@ -19,7 +35,7 @@ def chunks(documents):
         for s in d["sections"]:
             ref = f"{d['id']}@{d['version']}#{s['key']}"
             result.append({**{k:v for k,v in d.items() if k!="sections"},
-                           **s, "ref": ref})
+                           **s, "ref": ref, "roles": with_seniors(d["roles"])})
     return sorted(result, key=lambda x:x["ref"])
 
 def digest(rows):

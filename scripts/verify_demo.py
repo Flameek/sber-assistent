@@ -22,7 +22,7 @@ def run(page):
         page.get_by_role("button", name="Открыть раздел инструкции").click()
         page.wait_for_function("r => new URL(location.href).searchParams.get('source') === r", arg=ref)
     def answer():
-        return page.get_by_test_id("stText").first
+        return page.locator(".st-key-answer")
     def check(msg):
         print("PASS:", msg, flush=True)
     role("Стажёр ИБ")
