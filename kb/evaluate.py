@@ -31,11 +31,11 @@ def mean(values):
     return round(statistics.mean(values), 3) if values else None
 
 
-def evaluate(engine, split="holdout", k=3):
+def evaluate(engine, split="holdout", k=3, ranker=None):
     all_rows = chunks(seed())
     # Кому на самом деле разрешён каждый раздел — для независимой проверки утечек.
     roles_by_ref = {row["ref"]: row["roles"] for row in all_rows}
-    service = Service(all_rows, engine)
+    service = Service(all_rows, engine, ranker)
 
     results = []
     precision, recall, hit1, reciprocal_ranks, times = [], [], [], [], []
@@ -75,6 +75,7 @@ def evaluate(engine, split="holdout", k=3):
 
     return {
         "split": split,
+        "ranker": service.ranker,
         "queries": len(results),
         "answerable": len(recall),
         "k": k,
@@ -91,7 +92,7 @@ def evaluate(engine, split="holdout", k=3):
 
 
 def print_summary(report):
-    print(f"Набор: {report['split']}  |  верно {report['correct']}/{report['queries']}"
+    print(f"Набор: {report['split']} ({report['ranker']})  |  верно {report['correct']}/{report['queries']}"
           f"  |  hit@1 {report['hit_at_1']}  |  MRR {report['mrr']}"
           f"  |  recall@{report['k']} {report['recall_at_k']}  |  утечек {report['leaks']}")
     print("По типам:", ", ".join(f"{t} {v}" for t, v in report["by_type"].items()))
@@ -106,10 +107,12 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--backend", choices=("elastic", "local"), default="local")
     parser.add_argument("--split", choices=("dev", "holdout", "stress"), default="holdout")
+    parser.add_argument("--ranker", choices=("tfidf", "hybrid"), default=None,
+                        help="метод поиска; по умолчанию из KB_RANKER или tfidf")
     parser.add_argument("--summary", action="store_true", help="коротко, вместо полного JSON")
     args = parser.parse_args()
     engine = Elastic() if args.backend == "elastic" else Local()
-    report = evaluate(engine, args.split)
+    report = evaluate(engine, args.split, ranker=args.ranker)
     if args.summary:
         print_summary(report)
     else:
