@@ -1,28 +1,46 @@
 """Local TF-IDF and extractive answers; no model downloads, API or Internet."""
 from collections import Counter
+from functools import lru_cache
 import math
 import re
-from .corpus import ROLES
 
-STOP=set('как где куда какой какая какие какому по за на и или у я кто мне для мои моя мою надо нужно нужен мне за бы уже реестр инцидент стажер учебный учебного пожалуйста'.split())
-# Normalize a few common terms of the synthetic handbook, independently of a user's role.
-FORMS=[
- (r"инцидент.*|реестр.*|учебн.*|стаж[её]р.*",None),
- (r"статус.*|состоян.*","статус"),(r"регистрир.*|зарегистр.*|созда.*|регистрац.*","регистрация"),
- (r"прав[ао]?|доступ.*","доступ"),(r"эскалац.*|эскалир.*","эскалация"),
- (r"классифи.*|категор.*","категория"),(r"заявк.*|заявок","заявка"),
- (r"карточк.*","карточка"),(r"влиян.*","влияние"),(r"критическ.*","критический"),
- (r"чтени.*","чтение"),(r"провер.*|посмотр.*|узна.*","проверить")]
+import pymorphy3
+
+
+MORPH = pymorphy3.MorphAnalyzer()
+
+# Служебные слова (в начальной форме): не несут смысла для поиска.
+STOP = set("как где куда какой по за на и или у я кто для мой надо нужно нужный бы уже пожалуйста".split())
+# Слова, которые есть почти во всех инструкциях этой базы и не помогают отличить один раздел от другого.
+DOMAIN_STOP = {"реестр", "инцидент", "стажер", "учебный"}
+# Небольшой словарь предметных синонимов. Формы слов теперь приводит к начальной форме pymorphy3,
+# поэтому здесь только разные слова с одним смыслом.
+SYNONYMS = {
+    "состояние": "статус",
+    "право": "доступ",
+    "регистрировать": "регистрация", "зарегистрировать": "регистрация", "создать": "регистрация", "создание": "регистрация",
+    "эскалировать": "эскалация",
+    "классифицировать": "категория", "классификация": "категория",
+    "проверка": "проверить", "посмотреть": "проверить", "узнать": "проверить",
+}
+
+
+@lru_cache(maxsize=None)
+def lemma(word):
+    """Начальная форма слова: «заявку» -> «заявка», «открыли» -> «открыть»."""
+    return MORPH.parse(word)[0].normal_form.replace("ё", "е")
+
+
 def terms(text):
-    out=[]
-    for term in re.findall(r"[a-zа-я0-9-]+",text.casefold().replace("ё","е")):
-        if term in STOP or len(term)<3: continue
-        for pat,value in FORMS:
-            if re.fullmatch(pat,term):
-                term=value
-                break
-        if term:out.append(term)
+    out = []
+    for word in re.findall(r"[a-zа-яё0-9-]+", text.casefold()):
+        base = lemma(word)
+        base = SYNONYMS.get(base, base)
+        if len(base) < 3 or base in STOP or base in DOMAIN_STOP:
+            continue
+        out.append(base)
     return out
+
 
 def rank(rows,question):
     if not rows:return []
