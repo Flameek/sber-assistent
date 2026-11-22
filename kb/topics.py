@@ -40,6 +40,27 @@ def row_topic(row):
     return row.get("topic") or LEGACY_TOPICS.get(row["rule"])
 
 
+SYSTEMS = r"vpn|siem|dlp|почт\w*|jira|confluence|sbercrm"
+REGISTRY_TARGETS = r"реестр.*|учебн.*|карточк.*|раздел.*|заявк.*|портал.*|систем.*|инструкц.*|отдел.*|подраздел.*|наставник.*|руководител.*|дежурн.*|течени.*|согласован.*"
+
+
+def names_other_system(question, area="реестр"):
+    """Вопрос явно про другую систему, чем выбранная (почта, VPN, SIEM...).
+
+    На такие вопросы инструкции выбранной системы не отвечают, даже если похожи по словам или смыслу.
+    """
+    q = normalize(question)
+    if area == "реестр":
+        # Прежнее правило словаря реестра: любая названная система или цель вне реестра.
+        targets = re.findall(r"\b(?:в|во|к|ко)\s+([a-zа-я][a-zа-я0-9_-]*)", q)
+        return bool(re.search(r"\b(?:" + SYSTEMS + r")\b", q)) or \
+            any(not re.fullmatch(REGISTRY_TARGETS, target) for target in targets)
+    # В SIEM и VPN упоминание почты бывает частью инструкции («пересылка на личную почту запрещена»),
+    # поэтому почта — другая система, только когда о ней спрашивают как о цели: «доступ к почте».
+    named = {name for name in re.findall(r"\b(vpn|siem|dlp|jira|confluence|sbercrm)\b", q) if name != area}
+    return bool(named) or bool(re.search(r"\b(?:в|во|к|ко)\s+почт", q))
+
+
 def query_topics(question):
     """Return ordered operations. More specific access types override read access.
 
@@ -49,11 +70,7 @@ def query_topics(question):
     q = normalize(question)
     # Only one teaching system is covered. Do not silently substitute it for
     # another explicitly named target such as mail, VPN or SIEM.
-    targets = re.findall(r"\b(?:в|во|к|ко)\s+([a-zа-я][a-zа-я0-9_-]*)", q)
-    allowed_target = r"реестр.*|учебн.*|карточк.*|раздел.*|заявк.*|портал.*|систем.*|инструкц.*|отдел.*|подраздел.*|наставник.*|руководител.*|дежурн.*|течени.*|согласован.*"
-    if any(not re.fullmatch(allowed_target, target) for target in targets):
-        return []
-    if re.search(r"\b(?:vpn|siem|dlp|почт\w*|jira|confluence|sbercrm)\b", q):
+    if names_other_system(question):
         return []
     found = []
 

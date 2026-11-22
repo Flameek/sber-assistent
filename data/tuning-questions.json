@@ -1,0 +1,22 @@
+[
+  {"id": "T01", "split": "tuning", "role": "ib", "area": "реестр", "question": "Хочу смотреть реестр инцидентов, как это устроить?", "expected": "answer", "relevant": ["access@2#request"]},
+  {"id": "T02", "split": "tuning", "role": "support", "area": "реестр", "question": "Как мне попасть в учебный реестр?", "expected": "answer", "relevant": ["access@2#request"]},
+  {"id": "T03", "split": "tuning", "role": "support", "area": "реестр", "question": "Обнаружил неполадку, куда её записать?", "expected": "answer", "relevant": ["create@1#new"]},
+  {"id": "T04", "split": "tuning", "role": "ib", "area": "реестр", "question": "Где видно, одобрили мою заявку или нет?", "expected": "answer", "relevant": ["status@1#check"]},
+  {"id": "T05", "split": "tuning", "role": "ib", "area": "реестр", "question": "Как оценить, насколько серьёзен инцидент?", "expected": "answer", "relevant": ["triage@1#classify"]},
+  {"id": "T06", "split": "tuning", "role": "support", "area": "реестр", "question": "Как оценить, насколько серьёзен инцидент?", "expected": "missing", "relevant": []},
+  {"id": "T07", "split": "tuning", "role": "ib", "area": "siem", "question": "Как попасть в учебную SIEM?", "expected": "answer", "relevant": ["siem-login@1#procedure"]},
+  {"id": "T08", "split": "tuning", "role": "ib", "area": "siem", "question": "Сработало оповещение в SIEM, что проверить?", "expected": "answer", "relevant": ["siem-alert@1#procedure"]},
+  {"id": "T09", "split": "tuning", "role": "ib", "area": "siem", "question": "Нужна копия журналов событий для расследования", "expected": "answer", "relevant": ["siem-export@1#procedure"]},
+  {"id": "T10", "split": "tuning", "role": "support", "area": "siem", "question": "Как посмотреть события в SIEM?", "expected": "missing", "relevant": []},
+  {"id": "T11", "split": "tuning", "role": "support", "area": "vpn", "question": "Как включить учебный VPN?", "expected": "answer", "relevant": ["vpn-connect@1#procedure"]},
+  {"id": "T12", "split": "tuning", "role": "ib", "area": "vpn", "question": "Клиент VPN пишет, что сертификат недействителен", "expected": "answer", "relevant": ["vpn-error@1#procedure"]},
+  {"id": "T13", "split": "tuning", "role": "ib", "area": "siem", "question": "Как настроить новое правило корреляции в SIEM?", "expected": "missing", "relevant": []},
+  {"id": "T14", "split": "tuning", "role": "support", "area": "vpn", "question": "Как поменять пароль от учебной учётки VPN?", "expected": "missing", "relevant": []},
+  {"id": "T15", "split": "tuning", "role": "ib", "area": "реестр", "question": "Как переназначить инцидент на другого аналитика?", "expected": "missing", "relevant": []},
+  {"id": "T16", "split": "tuning", "role": "support", "area": "реестр", "question": "Как распечатать карточку инцидента?", "expected": "missing", "relevant": []},
+  {"id": "T17", "split": "tuning", "role": "ib", "area": "vpn", "question": "Можно ли раздать VPN с телефона коллеге?", "expected": "missing", "relevant": []},
+  {"id": "T18", "split": "tuning", "role": "support", "area": "реестр", "question": "Где взять шаблон служебной записки?", "expected": "missing", "relevant": []},
+  {"id": "T19", "split": "tuning", "role": "ib", "area": "siem", "question": "Какая погода будет завтра?", "expected": "missing", "relevant": []},
+  {"id": "T20", "split": "tuning", "role": "support", "area": "vpn", "question": "Как оформить больничный?", "expected": "missing", "relevant": []}
+]
