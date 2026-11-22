@@ -21,6 +21,7 @@ class UserTests(unittest.TestCase):
                 self.assertNotIn('password', stored)
                 self.assertNotEqual(db.execute('SELECT token FROM sessions').fetchone()[0], token)
                 db.execute("UPDATE users SET profile='support' WHERE username='oleg'")
+            db.close()
             self.assertEqual(users.session(token)['profile'], 'support')
             users.logout(token)
             self.assertIsNone(users.session(token))

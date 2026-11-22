@@ -7,7 +7,7 @@ ROOT = Path(__file__).resolve().parents[1]
 ROLES = {"ib": "Стажёр ИБ", "support": "Стажёр поддержки"}
 
 def seed():
-    return json.loads((ROOT / "data/documents.json").read_text())
+    return json.loads((ROOT / "data/documents.json").read_text(encoding="utf-8"))
 
 def chunks(documents):
     latest = {}
