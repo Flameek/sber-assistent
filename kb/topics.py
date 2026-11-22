@@ -23,6 +23,11 @@ TOPICS = {
     "request-rejected": "Действия при отклонении заявки",
     "request-deadline": "Срок обработки заявки",
     "access-problem": "Ошибка при работе с доступом",
+    "access-grant": "Выдача прав стажёру",
+    "case-handover": "Передача обращения в ИБ",
+    "audit-log": "Просмотр журнала событий",
+    "weekly-report": "Еженедельный отчёт",
+    "users-export": "Выгрузка базы пользователей",
 }
 LEGACY_TOPICS = {
     "access": "access-read", "register": "incident-create",
@@ -41,7 +46,7 @@ def row_topic(row):
 
 
 SYSTEMS = r"vpn|siem|dlp|почт\w*|jira|confluence|sbercrm"
-REGISTRY_TARGETS = r"реестр.*|учебн.*|карточк.*|раздел.*|заявк.*|портал.*|систем.*|инструкц.*|отдел.*|подраздел.*|наставник.*|руководител.*|дежурн.*|течени.*|согласован.*"
+REGISTRY_TARGETS = r"иб|реестр.*|учебн.*|карточк.*|раздел.*|заявк.*|портал.*|систем.*|инструкц.*|отдел.*|подраздел.*|наставник.*|руководител.*|дежурн.*|течени.*|согласован.*"
 
 
 def names_other_system(question, area="реестр"):
@@ -100,6 +105,14 @@ def query_topics(question):
     elif request:
         add("request-status", r"статус|состоян|этап|отслед")
 
+    # Операции старших ролей (kb/corpus.py: ROLES). У младших ролей таких инструкций нет,
+    # поэтому вопрос получает честный отказ, а не похожую по словам чужую инструкцию.
+    if re.search(r"выгруз|экспорт|скача|список", q) and re.search(r"пользовател|сотрудник", q):
+        add("users-export", r"выгруз|экспорт|скача|список")
+    add("weekly-report", r"еженедельн\w* отчет|отчет\w* (?:по инцидентам )?за неделю")
+    add("audit-log", r"журнал\w* событ|аудит|кто (?:менял|изменил|правил)")
+    add("case-handover", r"(?:переда\w*|передач\w*) обращени|обращени\w* (?:\w+ )?(?:в|во) (?:иб|отдел)")
+
     if incident:
         add("incident-delete", r"удал|стереть|стира")
         add("incident-create", r"зарегистр|регистрир|регистрац|созда|завест|новая карточка")
@@ -108,6 +121,9 @@ def query_topics(question):
 
     if access:
         specific = False
+        # Выдать права (действие аналитика) — не то же самое, что запросить их (действие стажёра).
+        if add("access-grant", r"выда|предостав"):
+            return list(dict.fromkeys(topic for _, topic in sorted(found)))
         for topic, pattern in (
             ("access-revoke", r"отозв|отзыв|лишить|заблок|отключ|удал.*доступ"),
             ("access-restore", r"восстанов|разблок"),

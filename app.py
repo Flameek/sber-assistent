@@ -16,14 +16,14 @@ from kb.users import Users
 
 load_dotenv(Path(__file__).with_name('.env'), override=False)
 st.set_page_config(page_title='Ассистент ИБ', page_icon='📘', layout='wide')
-PROFILES = {**ROLES, 'lead': 'Тимлид ИБ'}
+PROFILES = ROLES  # тимлид — старшая роль в общем списке
 AREAS = {'реестр': 'Реестр инцидентов', 'siem': 'Учебная SIEM', 'vpn': 'Учебный VPN'}
 store = Store()
 users = Users(store.path)
 demo = os.getenv('KB_DEMO_MODE', 'false').lower() == 'true'
 
 if demo:
-    profile = st.sidebar.selectbox('Учебный профиль', ['support', 'ib', 'lead'], format_func=PROFILES.get)
+    profile = st.sidebar.selectbox('Учебный профиль', list(PROFILES), format_func=PROFILES.get)
     username = 'demo-' + profile
     st.sidebar.caption('Демонстрационный режим · только вымышленные данные')
 else:
@@ -52,7 +52,7 @@ else:
         users.logout(st.session_state.get('auth_token'))
         st.session_state.clear()
         st.rerun()
-reader = 'ib' if profile == 'lead' else profile
+reader = profile  # права старших ролей включают права младших (kb/corpus.py)
 all_rows = chunks(store.published())
 areas = sorted({r['area'] for r in all_rows if reader in r['roles']}, key=lambda value: (value != 'реестр', value))
 if not areas:

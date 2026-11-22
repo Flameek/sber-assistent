@@ -5,7 +5,7 @@ import sqlite3
 import tempfile
 import unittest
 
-from kb.corpus import ROOT, chunks, seed
+from kb.corpus import ROOT, chunks, seed, with_seniors
 from kb.store import Store, validate
 
 
@@ -57,7 +57,8 @@ class ReviewTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             validate(doc)
         # Even legacy data never overrides document-level access during chunking.
-        self.assertEqual(chunks([doc])[0]['roles'], ['ib'])
+        self.assertEqual(chunks([doc])[0]['roles'], with_seniors(['ib']))
+        self.assertNotIn('support', chunks([doc])[0]['roles'])
 
     def test_approval_records_author_and_reviewer(self):
         with tempfile.TemporaryDirectory() as directory:
