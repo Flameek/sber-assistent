@@ -117,15 +117,16 @@ class Service:
                 'text': 'В доступных инструкциях нет подтверждённого ответа. Обратитесь в службу сопровождения учебного реестра.',
                 'sources': [], 'ranked': [], 'explanation': 'Похожее название операции не подтверждает порядок её выполнения.'}
 
-    def answer_topic(self, rows, question, topic):
+    def answer_topic(self, rows, question, topic, semantic=False):
+        """semantic=True: операцию уже выбрали эмбеддинги, поэтому совпадение слов не обязательно."""
         missing = self.missing(question, topic)
         scoped = [r for r in rows if row_topic(r) == topic] if topic else []
         if not scoped:
             return missing
         ranked = rank(scoped, question)
-        if not ranked or ranked[0][0] < 0.10:
+        if not semantic and (not ranked or ranked[0][0] < 0.10):
             return missing
-        refs = [r['ref'] for _, r in ranked]
+        refs = [r['ref'] for _, r in ranked] or [r['ref'] for r in scoped]
         highest = max(r['priority'] for r in scoped)
         winners = [r for r in scoped if r['priority'] == highest]
         # Compare the same operation (topic), even across different legacy rules.
@@ -151,6 +152,8 @@ class Service:
                     ('. Различаются факты: ' + ', '.join(contradicted) if explicit else '. Нужна проверка редактора.'),
                     'contact': contact}
         ordered = rank(winners, question)
+        if not ordered and semantic:
+            ordered = [(0.0, r) for r in sorted(winners, key=lambda r: r['ref'])]
         if not ordered:
             return missing
         row = ordered[0][1]

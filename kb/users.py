@@ -10,9 +10,10 @@ import re
 import secrets
 import sqlite3
 import time
+from .corpus import ROLES
 
 
-PROFILES = ('ib', 'support', 'lead')
+PROFILES = tuple(ROLES)
 
 
 class Users:
@@ -38,7 +39,7 @@ class Users:
 
     def create(self, username, password, profile):
         if not re.fullmatch(r'[a-zA-Z0-9_.-]{3,48}', username or '') or profile not in PROFILES:
-            raise ValueError('Логин: 3–48 латинских букв/цифр, роль: ib/support/lead')
+            raise ValueError('Логин: 3–48 латинских букв/цифр, роль: ' + '/'.join(PROFILES))
         if not isinstance(password, str) or not 10 <= len(password) <= 256:
             raise ValueError('Пароль: от 10 до 256 символов')
         salt = secrets.token_hex(16)

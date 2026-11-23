@@ -5,7 +5,7 @@ import sqlite3
 import tempfile
 import unittest
 
-from kb.corpus import ROOT, chunks, seed
+from kb.corpus import ROOT, chunks, seed, with_seniors
 from kb.store import Store, validate
 
 
@@ -14,7 +14,7 @@ class ReviewTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             store = Store(Path(directory) / 'test.sqlite')
             before = store.published()
-            doc = json.loads((ROOT / 'data/update-example.json').read_text())
+            doc = json.loads((ROOT / 'data/update-example.json').read_text(encoding="utf-8"))
             n = store.propose(doc, 'support')
             with self.assertRaises(PermissionError):
                 store.reject(n, 'ib', 'Нет согласования')
@@ -43,6 +43,7 @@ class ReviewTests(unittest.TestCase):
                 new = deepcopy(doc)
                 new['version'] += 1
                 db.execute("INSERT INTO proposals VALUES (1,?,'pending')", (json.dumps(new),))
+            db.close()
             store = Store(path)
             self.assertEqual(len(store.published()), 1)
             self.assertEqual(store.pending('lead')[0][0], 1)
@@ -56,12 +57,13 @@ class ReviewTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             validate(doc)
         # Even legacy data never overrides document-level access during chunking.
-        self.assertEqual(chunks([doc])[0]['roles'], ['ib'])
+        self.assertEqual(chunks([doc])[0]['roles'], with_seniors(['ib']))
+        self.assertNotIn('support', chunks([doc])[0]['roles'])
 
     def test_approval_records_author_and_reviewer(self):
         with tempfile.TemporaryDirectory() as directory:
             store = Store(Path(directory) / 'test.sqlite')
-            doc = json.loads((ROOT / 'data/update-example.json').read_text())
+            doc = json.loads((ROOT / 'data/update-example.json').read_text(encoding="utf-8"))
             n = store.propose(doc, 'ib')
             store.approve(n, 'lead')
             record = store.reviews('lead')[0]
